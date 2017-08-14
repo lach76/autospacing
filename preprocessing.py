@@ -295,7 +295,7 @@ class Preprocessor(object):
         return w2v
 
     # 데이터 + padding
-    def pad_Xsequences_train(sentences, maxlen):
+    def pad_Xsequences_train(self, sentences, maxlen):
         nullItem = []
         itemLen = len(sentences[0][0])
         for i in range(0, itemLen):
@@ -318,7 +318,7 @@ class Preprocessor(object):
         return np.array(newVec, dtype='f')
 
     # padding + 데이터
-    def pad_Xsequences_test(sentences, maxlen):
+    def pad_Xsequences_test(self, sentences, maxlen):
         nullItem = []
         itemLen = len(sentences[0][0])
         for i in range(0, itemLen):
@@ -341,7 +341,7 @@ class Preprocessor(object):
         return np.array(newVec, dtype='f')
 
     # 데이터 + padding
-    def pad_Ysequences_train(label, maxlen):
+    def pad_Ysequences_train(self, label, maxlen):
         len1 = len(label)
         newVec = []
         nullItem = 0
@@ -360,7 +360,7 @@ class Preprocessor(object):
         return np.array(newVec, dtype='int32')
 
     # padding + 데이터
-    def pad_Ysequences_test(label, maxlen):
+    def pad_Ysequences_test(self, label, maxlen):
         len1 = len(label)
         newVec = []
         nullItem = 0
@@ -410,3 +410,10 @@ class Preprocessor(object):
         inputY = self.pad_Ysequences_test(labels, sequence_size)
 
         return inputX, inputY
+
+    def getXVectorData(self, line, w2vModel, sequence_size):
+        sentence = [w2vModel.wv[w] for w in line]
+        sentences = []
+        sentences.append(sentence)
+        inputX = self.pad_Xsequences_test(sentences, sequence_size)
+        return inputX
