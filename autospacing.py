@@ -30,6 +30,7 @@ ITER_NUM = 1
 DROPOUT_RATE = 0.5
 EARLY_STOP_COUNT = 6
 
+"""
 #training
 X_DATA, Y_DATA = preprocessor.getVectorData(TRAIN_FIXED_FILE, W2V, SEQUENCE_SIZE)
 training = Training(MODEL_FILE, WORD2VEC_FILE, LEARNING_RATE, BATCH_SIZE, ITER_NUM, SEQUENCE_SIZE, VECTOR_SIZE, DROPOUT_RATE, EARLY_STOP_COUNT)
@@ -38,7 +39,7 @@ training.train(X_DATA, Y_DATA)
 
 
 sentence = "그책에는이별이야기가있을까어쩌면네가지금막귀퉁이를접고있는페이지에"
-answer = "그 책에는 이별 이야기가 있을까 어쩌면 네가 지금 막 귀퉁이를 접고 있는 페이지에"
+answer = "그 책에는 이별 이야기가 있을까 어쩌면 네가 지금 막 귀퉁이를 접고 있는 페이지에 "
 X_DATA = preprocessor.getXVectorData(sentence, W2V, SEQUENCE_SIZE)
 predicting = Training(MODEL_FILE, WORD2VEC_FILE, LEARNING_RATE, 1, ITER_NUM, SEQUENCE_SIZE, VECTOR_SIZE, drop_out_rate=1.0)
 predicted_sentence = predicting.predict(X_DATA, sentence)
@@ -48,4 +49,3 @@ if predicted_sentence == answer:
 else:
     print ("X")
 
-"""
